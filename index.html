@@ -3,817 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Argyris's Immaturity to Maturity Theory - Interactive Infographic</title>
-    <meta name="description" content="Explore Chris Argyris's organizational behavior theory through an interactive infographic showcasing the conflict between employee maturity and traditional management structures.">
-    <meta name="keywords" content="Argyris, organizational behavior, employee maturity, management theory, workplace psychology">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <title>Organizational Behaviour Assignment - Group 2</title>
     <style>
-        :root {
-            --primary-dark: #073B4C;
-            --primary-blue: #118AB2;
-            --accent-green: #06D6A0;
-            --accent-yellow: #FFD166;
-            --accent-red: #FF6B6B;
-            --text-light: #6B7280;
-            --bg-light: #F9FAFB;
-        }
-
-        * {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+            color: #333;
         }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+        .container {
+            width: 85%;
+            margin: auto;
+            padding: 20px 0;
         }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .flow-arrow {
-            position: relative;
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 1px;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-weight: 300;
+        }
+        .section-box {
+            background: #fff;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #000000;
+            font-size: 2em;
+			text-align: center;
+            border-bottom: 4px solid #000000;
+            padding-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            align-items: right;
+			
+        }
+        h2 .icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .team-info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #555;
+        }
+        .case-study h3 {
+            color: #34495e;
+            font-size: 1.5em;
+        }
+        .case-study ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .case-study li {
+            background: #eef5ff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .case-study li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .infographic-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .infographic-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .infographic-item:hover {
+            transform: scale(1.05);
+        }
+        .infographic-item h4 {
+            color: #495057;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .infographic-item .value {
+            font-size: 3em;
+            font-weight: 700;
+            color: #007bff;
+            margin: 10px 0;
+        }
+        .infographic-item p {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .dual-side {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .dual-side > div {
+            flex: 1;
+            min-width: 300px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .dual-side h3 {
+            margin-top: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+            gap: 10px;
         }
-
-        .flow-arrow::after {
-            content: '▼';
-            font-size: 2rem;
-            color: var(--accent-red);
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-            animation: bounce 2s infinite;
-        }
-
-        @media (min-width: 768px) {
-            .flow-arrow::after {
-                content: '▶';
-                transform: rotate(0deg);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .animate-slide-in-left {
-            animation: slideInLeft 0.8s ease-out forwards;
-        }
-
-        .animate-slide-in-right {
-            animation: slideInRight 0.8s ease-out forwards;
-        }
-
-        .card {
-            transition: all 0.3s ease;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .personality-item {
-            transition: all 0.3s ease;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .personality-item:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-            transform: translateX(5px);
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #D1D5DB;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-dot.active {
-            background-color: var(--primary-blue);
-            transform: scale(1.2);
-        }
-
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
-            z-index: 1000;
-            transition: width 0.3s ease;
-        }
-
-        .floating-nav {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .floating-nav {
-                display: none;
-            }
-        }
-
-        .section {
-            min-height: 50vh;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .icon-bounce {
-            animation: bounce 2s infinite;
-        }
-
-        .tooltip {
-            position: relative;
-            cursor: help;
-        }
-
-        .tooltip::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-        }
-
-        .tooltip:hover::before {
-            opacity: 1;
+        .positive h3 { color: #28a745; }
+        .negative h3 { color: #dc3545; }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="bg-gray-50">
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progressBar"></div>
+<body>
 
-    <!-- Floating Navigation -->
-    <nav class="floating-nav" id="floatingNav">
-        <div class="nav-dot active" data-section="header" title="Introduction"></div>
-        <div class="nav-dot" data-section="conflict" title="Core Conflict"></div>
-        <div class="nav-dot" data-section="personalities" title="Personality Types"></div>
-        <div class="nav-dot" data-section="flow" title="Conflict Flow"></div>
-        <div class="nav-dot" data-section="analysis" title="Analysis"></div>
-        <div class="nav-dot" data-section="conclusion" title="Conclusion"></div>
-    </nav>
+    <header>
+        <div class="container">
+            <h1>Organizational Behaviour Assignment</h1>
+            <h2>Group Assignment Two</h2>
+        </div>
+    </header>
 
-    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
-        
-        <!-- Header Section -->
-        <header class="text-center section" id="header">
-            <div class="animate-fade-in-up">
-                <h1 class="text-5xl md:text-7xl font-black gradient-text mb-4 leading-tight">
-                    The Maturity Mismatch
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-                    Visualizing Argyris's Theory on Organizational Behaviour
-                </p>
-                <div class="flex justify-center">
-                    <div class="bg-white rounded-full p-2 shadow-lg">
-                <div class="text-4xl icon-bounce">🎯</div>
-                    </div>
+    <div class="container">
+        <section class="section-box">
+            <h2><i class="fas fa-scroll icon"></i> Assignment Topic</h2>
+            <p><strong>Explain the concept of office politicking through a case study</strong></p>
+            <p>Office politicking refers to the use of informal influence, networking, and personal relationships to achieve objectives within an organization. It is a natural part of human interaction, arising due to competition for resources, promotions, and recognition. Far from being purely negative, office politics can also be constructive, helping employees navigate conflicts, drive organizational change, and gain visibility for innovative ideas.</p>
+            <div class="team-info">
+                <h3><i class="fas fa-users icon"></i> Prepared By:</h3>
+                <p>Naman Tyagi, Siddhant Deepak Kumar Pradhan, Rhea Tyagi</p>
+                <p><strong>PRN:</strong> 25020448058, 25020448111, 25020448149</p>
+                <p><strong>Subject:</strong> Organizational Behaviour</p>
+                <p><strong>Subject Code:</strong> 20448107</p>
+                <p><strong>Under the Guidance of:</strong> Sangita Soman</p>
+            </div>
+        </section>
+
+        <section class="section-box">
+            <h2><i class="fas fa-search-plus icon"></i> Why Office Politics Exists</h2>
+            <ul>
+                <li><strong>Competition for Scarce Resources (2010):</strong> Limited promotions, budgets, and recognition create competition.</li>
+                <li><strong>Ambiguity in Roles (2015):</strong> Lack of clarity allows influence and lobbying to dominate decisions.</li>
+                <li><strong>Diverse Interests (2020):</strong> Different personal ambitions, values, and goals fuel political behavior.</li>
+                <li><strong>Organizational Change (2023):</strong> Restructuring, mergers, or leadership shifts amplify politicking.</li>
+            </ul>
+        </section>
+
+        <section class="section-box case-study">
+            <h2><i class="fas fa-chart-line icon"></i> Case Study (Positive Politics)</h2>
+            <h3>Microsoft under Satya Nadella: The Story of a Cultural Transformation 🚀</h3>
+            <p>When Satya Nadella took over as CEO of Microsoft in 2014, the company was struggling with a deeply entrenched internal culture of "silos," where departments competed against each other rather than collaborating. This created internal rivalries and a "know-it-all" attitude that stifled innovation. Nadella understood that simply changing the strategy wouldn't be enough; he needed to change the company's political landscape.</p>
+            <ul>
+                <li><strong>Building Alliances and Shifting Power:</strong> Nadella used his influence not to consolidate power for himself but to realign it throughout the company. He championed a new "growth mindset" and strategically built alliances with key leaders to break down departmental barriers. He empowered these leaders to work together, effectively making collaboration a politically savvy move.</li>
+                <li><strong>Creating a New Culture:</strong> By publicly rewarding and celebrating teams that collaborated, Nadella made positive politicking—such as networking and sharing resources across departments—the new standard. This moved the company away from its old, competitive culture and toward one of empathy and teamwork.</li>
+            </ul>
+            <p>The impact was profound: Microsoft's market value tripled, and it saw immense growth in new areas like Azure and AI. This wasn't just a result of a new strategy; it was the direct outcome of a leader using political skill to transform a company's culture for the better.</p>
+        </section>
+
+        <section class="section-box case-study">
+            <h2><i class="fas fa-exclamation-triangle icon"></i> Case Study (Negative Politics)</h2>
+            <h3>The Enron Scandal: A Cautionary Tale of Deceit 💥</h3>
+            <p>The Enron scandal serves as a stark example of how negative office politics can lead to catastrophic failure. At Enron, executives used their positions not to benefit the company but to enrich themselves through deceit and manipulation.</p>
+            <ul>
+                <li><strong>Manipulation and Deceit:</strong> Executives used complex, fraudulent accounting practices to hide the company’s massive debt and inflate profits. They manipulated information and misled investors to maintain a facade of success. This was a highly political act—using power and information control for personal gain.</li>
+                <li><strong>Suppressing Dissent:</strong> Within the company, executives created a culture that rewarded blind loyalty over competence. They promoted people who would not question their methods and actively silenced whistleblowers who tried to expose the fraud. The political system was designed to punish anyone who challenged the status quo, creating an environment of fear and complicity.</li>
+            </ul>
+            <p>The result of this negative politicking was the complete collapse of Enron. It declared bankruptcy, over 20,000 employees lost their jobs, and countless investors lost their life savings. The case showed that when politics is used to undermine truth and transparency, it can destroy even the most powerful corporations.</p>
+        </section>
+
+        <section class="section-box">
+            <h2><i class="fas fa-balance-scale icon"></i> Positive and Negative Outcomes</h2>
+            <div class="dual-side">
+                <div class="positive">
+                    <h3><i class="fas fa-sun"></i> The Bright Side</h3>
+                    <ul>
+                        <li>Enables career growth through networking.</li>
+                        <li>Helps leaders implement change by building coalitions.</li>
+                        <li>Supports conflict resolution via negotiation and persuasion.</li>
+                        <li>Encourages organizational survival in competitive environments.</li>
+                    </ul>
                 </div>
-                <div class="text-center text-gray-700 text-lg mt-4">
-                    <p><strong>Internal Assessment</strong></p>
-                    <p>Subject: Organizational Behavior</p>
-                    <p>Group 5: Siddhant Pradhan, Vinit Yadav, Himanshi Sharma, Harshal More, Yash Doshi</p>
-                    <p>Course: MBA – Executive | 2025 – 2027</p>
-                    <p>Under the guidance of Prof. Sangita Soman</p>
+                <div class="negative">
+                    <h3><i class="fas fa-moon"></i> The Dark Side</h3>
+                    <ul>
+                        <li>Favoritism and nepotism harm morale.</li>
+                        <li>Toxic culture from gossip and manipulation.</li>
+                        <li>Reduced productivity as energy is diverted to lobbying.</li>
+                        <li>High turnover when meritocracy is undermined.</li>
+                    </ul>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <main class="space-y-16 mt-4">
+        <section class="section-box">
+            <h2><i class="fas fa-cogs icon"></i> Managing Office Politics</h2>
+            <h3>Constructive Use of Politics</h3>
+            <p><strong>Strategies for Organizations:</strong></p>
+            <ul>
+                <li>Build transparent appraisal and promotion systems.</li>
+                <li>Provide leadership and emotional intelligence training.</li>
+                <li>Encourage open communication to reduce rumors.</li>
+                <li>Reward collaboration over individual maneuvering.</li>
+                <li>Promote ethical leadership to set positive examples.</li>
+            </ul>
+        </section>
 
-            <!-- Core Conflict Section -->
-            <section class="section" id="conflict">
-                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 card">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                            The Core Conflict
-                        </h2>
-                        <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto rounded-full"></div>
-                    </div>
-                    <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                        <p class="text-lg md:text-xl mb-6">
-                            Chris Argyris proposed a fundamental clash between the developmental needs of employees and the structure of traditional organizations. As people naturally progress from immaturity to maturity, they seek autonomy and responsibility.
-                        </p>
-                        <p class="text-lg md:text-xl">
-                            However, many organizations are designed in a way that forces these mature individuals into passive, dependent roles, leading to widespread dissatisfaction and inefficiency. This infographic explores that conflict and its solutions.
-                        </p>
-                    </div>
+        <section class="section-box infographic-section">
+            <h2><i class="fas fa-chart-pie icon"></i> Prevalence of Office Politics</h2>
+            <div class="infographic-container">
+                <div class="infographic-item">
+                    <h4>Experience of Politics</h4>
+                    <p>According to a U.S. survey by Randstad:</p>
+                    <div class="value">58%</div>
+                    <p>of employees experience office politics regularly.</p>
                 </div>
-            </section>
-
-            <!-- Personality Types Section -->
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 section" id="personalities">
-                <div class="bg-white rounded-2xl shadow-xl p-8 card animate-slide-in-left">
-                    <div class="text-center mb-6">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-                            <span class="text-3xl">👎</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-red-600 mb-2">The Immature Personality</h3>
-                        <div class="w-16 h-1 bg-red-500 mx-auto rounded-full"></div>
-                    </div>
-                    <ul class="space-y-2">
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🔒</span>
-                                <div>
-                                    <strong class="text-gray-900">Passive:</strong>
-                                    <span class="text-gray-600 ml-2">Waits for direction and guidance</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🤝</span>
-                                <div>
-                                    <strong class="text-gray-900">Dependent:</strong>
-                                    <span class="text-gray-600 ml-2">Relies heavily on others for decisions</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">📋</span>
-                                <div>
-                                    <strong class="text-gray-900">Few Behaviours:</strong>
-                                    <span class="text-gray-600 ml-2">Follows basic instructions only</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🌊</span>
-                                <div>
-                                    <strong class="text-gray-900">Shallow Interests:</strong>
-                                    <span class="text-gray-600 ml-2">Lacks deep engagement with work</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">⬇️</span>
-                                <div>
-                                    <strong class="text-gray-900">Subordinate Position:</strong>
-                                    <span class="text-gray-600 ml-2">Has little to no control over work</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">❓</span>
-                                <div>
-                                    <strong class="text-gray-900">Lack of Self-Awareness:</strong>
-                                    <span class="text-gray-600 ml-2">Limited sense of personal identity</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="infographic-item">
+                    <h4>Negative Impact</h4>
+                    <p>A CareerBuilder survey found:</p>
+                    <div class="value">45%</div>
+                    <p>of employees believe politics negatively impact their career.</p>
                 </div>
-
-                <div class="bg-white rounded-2xl shadow-xl p-8 card animate-slide-in-right">
-                    <div class="text-center mb-6">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                            <span class="text-3xl">👍</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-green-600 mb-2">The Mature Personality</h3>
-                        <div class="w-16 h-1 bg-green-500 mx-auto rounded-full"></div>
-                    </div>
-                    <ul class="space-y-2">
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🚀</span>
-                                <div>
-                                    <strong class="text-gray-900">Active:</strong>
-                                    <span class="text-gray-600 ml-2">Takes initiative and is self-directed</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🎯</span>
-                                <div>
-                                    <strong class="text-gray-900">Independent:</strong>
-                                    <span class="text-gray-600 ml-2">Self-reliant and autonomous in decisions</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🎨</span>
-                                <div>
-                                    <strong class="text-gray-900">Diverse Behaviours:</strong>
-                                    <span class="text-gray-600 ml-2">Capable of complex, varied actions</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🏔️</span>
-                                <div>
-                                    <strong class="text-gray-900">Deep Interests:</strong>
-                                    <span class="text-gray-600 ml-2">Pursues long-term, meaningful goals</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">⬆️</span>
-                                <div>
-                                    <strong class="text-gray-900">Equal or Superordinate:</strong>
-                                    <span class="text-gray-600 ml-2">Seeks control over their work environment</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="personality-item">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4 flex-shrink-0">🧠</span>
-                                <div>
-                                    <strong class="text-gray-900">High Self-Awareness:</strong>
-                                    <span class="text-gray-600 ml-2">Strong sense of self-worth and identity</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="infographic-item">
+                    <h4>Positive Use</h4>
+                    <p>A study in the Journal of Organizational Behaviour found:</p>
+                    <div class="value">27%</div>
+                    <p>more likely to be rated as effective leaders with high political skills.</p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Conflict Flow Section -->
-            <section class="section" id="flow">
-                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 card">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                            How the Conflict Unfolds
-                        </h2>
-                        <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-red-500 mx-auto rounded-full mb-6"></div>
-                        <p class="text-lg text-gray-600 max-w-4xl mx-auto">
-                            Traditional management structures, with their rigid hierarchies and specialized tasks, often stifle the natural tendencies of a mature adult. This creates a cycle of frustration and disengagement.
-                        </p>
-                    </div>
-                    
-                    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-start text-center gap-6 lg:gap-8">
-                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl p-6 w-full max-w-xs card">
-                            <div class="text-4xl mb-3">🏢</div>
-                            <h4 class="font-bold text-blue-700 text-lg mb-2">Traditional Management</h4>
-                            <p class="text-sm text-blue-600">Strict hierarchy, rigid control, and limited autonomy</p>
-                        </div>
-                        
-                        <div class="flex items-center justify-center flow-arrow lg:mt-8">
-                            <div class="tooltip" data-tooltip="Creates pressure and constraints">
-                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                                    <span class="text-red-600 text-xl">⚡</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-xl p-6 w-full max-w-xs card">
-                            <div class="text-4xl mb-3">😔</div>
-                            <h4 class="font-bold text-yellow-700 text-lg mb-2">Forces Employee Into</h4>
-                            <p class="text-sm text-yellow-600">Passive, subordinate role that conflicts with natural development</p>
-                        </div>
-                        
-                        <div class="flex items-center justify-center flow-arrow lg:mt-8">
-                            <div class="tooltip" data-tooltip="Results in organizational dysfunction">
-                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                                    <span class="text-red-600 text-xl">💥</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-xl p-6 w-full max-w-xs card">
-                            <div class="text-4xl mb-3">⚔️</div>
-                            <h4 class="font-bold text-red-700 text-lg mb-2">Resulting Conflict</h4>
-                            <p class="text-sm text-red-600">Clash between mature personality needs and organizational demands</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section class="section-box conclusion">
+            <h2><i class="fas fa-fist-raised icon"></i> Conclusion</h2>
+            <p>Office politics is inevitable in every workplace. It can be either a powerful driver of growth and innovation or a destructive force that undermines trust and productivity. The challenge lies not in eliminating politics, but in channeling it ethically. Leaders must use influence to build trust, employees should practice transparency, and organizations must create systems that reward fairness. As the contrasting cases of Microsoft and Enron show, the way politics is managed determines whether it becomes an asset or a liability.</p>
+        </section>
 
-            <!-- Analysis Section -->
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 section" id="analysis">
-                <div class="bg-white rounded-2xl shadow-xl p-8 card">
-                    <div class="text-center mb-6">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-                            <span class="text-3xl">📉</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">The Negative Consequences</h3>
-                        <div class="w-16 h-1 bg-red-500 mx-auto rounded-full mb-4"></div>
-                        <p class="text-gray-600 text-sm">
-                            When mature individuals are treated immaturely, the organizational costs are significant. This conflict manifests as frustration, disengagement, and a desire to escape the restrictive environment.
-                        </p>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="consequencesChart" aria-label="Chart showing negative consequences of the maturity mismatch"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-xl p-8 card">
-                    <div class="text-center mb-6">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                            <span class="text-3xl">📈</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">The Path to Maturity: Solutions</h3>
-                        <div class="w-16 h-1 bg-green-500 mx-auto rounded-full mb-4"></div>
-                        <p class="text-gray-600 text-sm">
-                            To resolve the conflict, organizations must adapt. By implementing strategies that empower employees, they can align the work environment with the needs of a mature personality, boosting engagement.
-                        </p>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="solutionsChart" aria-label="Chart showing solutions and their impact on employee engagement"></canvas>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Conclusion Section -->
-            <section class="section" id="conclusion">
-                <div class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white rounded-2xl shadow-2xl p-8 md:p-12 text-center card">
-                    <div class="mb-8">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 rounded-full mb-6">
-                            <span class="text-4xl">🏆</span>
-                        </div>
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                            Achieving a Win-Win Scenario
-                        </h2>
-                        <div class="w-24 h-1 bg-gradient-to-r from-green-400 to-blue-400 mx-auto rounded-full mb-8"></div>
-                    </div>
-                    
-                    <div class="max-w-4xl mx-auto">
-                        <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-                            By fostering a mature work environment, organizations don't just satisfy employees; they build a more resilient, innovative, and productive workforce. Treating people like adults unlocks their full potential, creating a powerful engine for success that benefits everyone involved.
-                        </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                            <div class="bg-white bg-opacity-10 rounded-lg p-6 backdrop-blur-sm">
-                                <div class="text-3xl mb-3">💡</div>
-                                <h4 class="font-semibold mb-2">Innovation</h4>
-                                <p class="text-sm text-gray-300">Empowered employees drive creative solutions</p>
-                            </div>
-                            <div class="bg-white bg-opacity-10 rounded-lg p-6 backdrop-blur-sm">
-                                <div class="text-3xl mb-3">📊</div>
-                                <h4 class="font-semibold mb-2">Productivity</h4>
-                                <p class="text-sm text-gray-300">Engaged workers deliver superior results</p>
-                            </div>
-                            <div class="bg-white bg-opacity-10 rounded-lg p-6 backdrop-blur-sm">
-                                <div class="text-3xl mb-3">🤝</div>
-                                <h4 class="font-semibold mb-2">Retention</h4>
-                                <p class="text-sm text-gray-300">Satisfied employees stay and grow with the organization</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </main>
     </div>
 
-    <script>
-        // Utility Functions
-        function wrapLabel(str, maxWidth) {
-            if (str.length <= maxWidth) {
-                return str;
-            }
-            const words = str.split(' ');
-            let lines = [];
-            let currentLine = words[0];
+    <footer class="footer">
+        &copy; 2025 Group Assignment. All rights reserved.
+    </footer>
 
-            for (let i = 1; i < words.length; i++) {
-                if (currentLine.length + words[i].length + 1 < maxWidth) {
-                    currentLine += ' ' + words[i];
-                } else {
-                    lines.push(currentLine);
-                    currentLine = words[i];
-                }
-            }
-            lines.push(currentLine);
-            return lines;
-        }
-
-        const tooltipTitleCallback = function(tooltipItems) {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            } else {
-                return label;
-            }
-        };
-
-        // Progress Bar
-        function updateProgressBar() {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('progressBar').style.width = scrollPercent + '%';
-        }
-
-        // Section Visibility Observer
-        const observerOptions = {
-            threshold: 0.3,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Update navigation
-                    const sectionId = entry.target.id;
-                    document.querySelectorAll('.nav-dot').forEach(dot => {
-                        dot.classList.remove('active');
-                    });
-                    const activeDot = document.querySelector(`[data-section="${sectionId}"]`);
-                    if (activeDot) {
-                        activeDot.classList.add('active');
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Navigation
-        function setupNavigation() {
-            document.querySelectorAll('.nav-dot').forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const sectionId = dot.getAttribute('data-section');
-                    const section = document.getElementById(sectionId);
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-        }
-
-        // Chart Configurations
-        const consequencesData = {
-            labels: ['High Frustration', 'Low Morale', 'Increased Absenteeism', 'Employee Turnover'],
-            datasets: [{
-                label: 'Negative Consequences (%)',
-                data: [40, 30, 15, 15],
-                backgroundColor: [
-                    '#FF6B6B',
-                    '#FFD166',
-                    '#118AB2',
-                    '#073B4C'
-                ],
-                borderColor: '#ffffff',
-                borderWidth: 3,
-                hoverOffset: 8,
-                hoverBorderWidth: 4
-            }]
-        };
-
-        const consequencesConfig = {
-            type: 'doughnut',
-            data: consequencesData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    animateRotate: true,
-                    duration: 2000,
-                    easing: 'easeOutQuart'
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            font: {
-                                size: 12,
-                                weight: '500'
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback,
-                            label: function(context) {
-                                return context.label + ': ' + context.parsed + '%';
-                            }
-                        },
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        borderColor: '#ffffff',
-                        borderWidth: 1
-                    }
-                }
-            }
-        };
-
-        const solutionsData = {
-            labels: [
-                'Job Enrichment', 
-                'Employee Empowerment', 
-                'Participative Management', 
-                'Job Enlargement'
-            ].map(label => wrapLabel(label, 16)),
-            datasets: [{
-                label: 'Impact on Employee Engagement (%)',
-                data: [90, 85, 75, 60],
-                backgroundColor: [
-                    '#06D6A0',
-                    '#118AB2',
-                    '#FFD166',
-                    '#FF6B6B'
-                ],
-                borderColor: '#ffffff',
-                borderWidth: 2,
-                borderRadius: 4,
-                borderSkipped: false
-            }]
-        };
-
-        const solutionsConfig = {
-            type: 'bar',
-            data: solutionsData,
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 2000,
-                    easing: 'easeOutQuart'
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    },
-                    y: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback,
-                            label: function(context) {
-                                return 'Engagement Impact: ' + context.parsed.x + '%';
-                            }
-                        },
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        borderColor: '#ffffff',
-                        borderWidth: 1
-                    }
-                }
-            }
-        };
-
-        // Initialize everything when page loads
-        window.addEventListener('load', function() {
-            // Initialize charts
-            const consequencesCtx = document.getElementById('consequencesChart').getContext('2d');
-            new Chart(consequencesCtx, consequencesConfig);
-
-            const solutionsCtx = document.getElementById('solutionsChart').getContext('2d');
-            new Chart(solutionsCtx, solutionsConfig);
-
-            // Setup observers and navigation
-            document.querySelectorAll('.section').forEach(section => {
-                observer.observe(section);
-            });
-
-            setupNavigation();
-
-            // Add scroll listener for progress bar
-            window.addEventListener('scroll', updateProgressBar);
-
-            // Initial progress bar update
-            updateProgressBar();
-
-            // Add initial visibility to first section
-            setTimeout(() => {
-                document.getElementById('header').classList.add('visible');
-            }, 100);
-        });
-
-        // Smooth scroll polyfill for older browsers
-        if (!('scrollBehavior' in document.documentElement.style)) {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/gh/iamdustan/smoothscroll@master/src/smoothscroll.js';
-            document.head.appendChild(script);
-        }
-    </script>
 </body>
 </html>
-
